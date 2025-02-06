@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            input{
+                width: 300px;
+                font-size: 20px;
+            }
+            button{
+                width: 230px;
+                font-size: 20px;
+            }
+            .button_div{
+                margin-top: 10px;
+            }
+            #container{
+                padding: 10px;
+                margin: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="container">
+            <div class="input_div">
+                <input placeholder="Enter the value of X" id="num1"/>
+                <input placeholder="Enter the value of Y" id="num2"/>
+                <input placeholder="Result will appear here" id="res" disabled/>
+            </div>
+
+            <div class="button_div">
+                <button onclick="performAddition()">Addition (X + Y)</button>
+                <button onclick="performSubtraction()">Subtraction (X - Y)</button>
+                <button onclick="performMultiplication()">Multiplication (X * Y)</button>
+                <button onclick="performDivision()">Division (X / Y)</button>
+            </div>            
+        </div>
+
+        <script>
+            function performAddition() {
+                let x = parseFloat(document.getElementById('num1').value);
+                let y = parseFloat(document.getElementById('num2').value);
+                document.getElementById('res').value = (isNaN(x) || isNaN(y)) ? 'Invalid input' : x + y;
+            }
+
+            function performSubtraction() {
+                let x = parseFloat(document.getElementById('num1').value);
+                let y = parseFloat(document.getElementById('num2').value);
+                document.getElementById('res').value = (isNaN(x) || isNaN(y)) ? 'Invalid input' : x - y;
+            }
+
+            function performMultiplication() {
+                let x = parseFloat(document.getElementById('num1').value);
+                let y = parseFloat(document.getElementById('num2').value);
+                document.getElementById('res').value = (isNaN(x) || isNaN(y)) ? 'Invalid input' : x * y;
+            }
+
+            function performDivision() {
+                let x = parseFloat(document.getElementById('num1').value);
+                let y = parseFloat(document.getElementById('num2').value);
+                document.getElementById('res').value = (isNaN(x) || isNaN(y) || y === 0) ? 'Invalid input' : x / y;
+            }
+        </script>
+    </body>
+</html>
