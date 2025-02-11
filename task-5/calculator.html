@@ -1,71 +1,34 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Basic Calculator</title>
-    <style>
-        input {
-            width: 300px;
-            font-size: 20px;
-        }
-
-        button {
-            width: 230px;
-            font-size: 20px;
-        }
-
-        .button_div {
-            margin-top: 10px;
-        }
-
-        #container {
-            padding: 10px;
-            margin: 10px;
-        }
-    </style>
+    <title>Grade Calculator</title>
 </head>
-
 <body>
-    <div id="container">
-        <div class="input_div">
-            <input placeholder="Enter the value of X" id="num1" />
-            <input placeholder="Enter the value of Y" id="num2" />
-            <input placeholder="Result will appear here" id="res" disabled />
-        </div>
+    <h1>Grade Calculator</h1>
+    <input type="number" id="scoreInput" placeholder="Enter score"> 
+    <button onclick="calculateGrade()">Get Grade</button>
+    <h2 id="gradeDisplay">Your Grade: </h2>
 
-        <div class="button_div">
-            <button onclick="performAddition()">Addition (X + Y)</button>
-            <button onclick="performSubtraction()">Subtraction (X - Y)</button>
-            <button onclick="performMultiplication()">Multiplication (X * Y)</button>
-            <button onclick="performDivision()">Division (X / Y)</button>
-        </div>
-    </div>
 
     <script>
-        function performAddition() {
-            let x = parseFloat(document.getElementById('num1').value);
-            let y = parseFloat(document.getElementById('num2').value);
-            document.getElementById('res').value = (isNaN(x) || isNaN(y)) ? 'Invalid input' : x + y;
-        }
+        function calculateGrade() {
+            let score = document.getElementById("scoreInput").value;
+            let grade = "";
 
-        function performSubtraction() {
-            let x = parseFloat(document.getElementById('num1').value);
-            let y = parseFloat(document.getElementById('num2').value);
-            document.getElementById('res').value = (isNaN(x) || isNaN(y)) ? 'Invalid input' : x - y;
-        }
+            if (score >= 80) {
+                grade = "A";
+            } else if (score >= 60 && score <= 79) {
+                grade = "B";
+            } else if (score >= 50 && score <= 59) {
+                grade = "C";
+            } else if (score >= 40 && score <= 49) {
+                grade = "D";
+            } else {
+                grade = "F";
+            }
 
-        function performMultiplication() {
-            let x = parseFloat(document.getElementById('num1').value);
-            let y = parseFloat(document.getElementById('num2').value);
-            document.getElementById('res').value = (isNaN(x) || isNaN(y)) ? 'Invalid input' : x * y;
-        }
-
-        function performDivision() {
-            let x = parseFloat(document.getElementById('num1').value);
-            let y = parseFloat(document.getElementById('num2').value);
-            document.getElementById('res').value = (isNaN(x) || isNaN(y) || y === 0) ? 'Invalid input' : x / y;
+            document.getElementById("gradeDisplay").innerText = "Your Grade: " + grade;
         }
     </script>
 </body>
-
 </html>
