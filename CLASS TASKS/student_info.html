@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Info</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input,
+        button {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            cursor: pointer;
+            font-size: 14px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-container button {
+            width: 30%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container " style="margin-top: -100px;">
+        <h1>Student Information</h1>
+        <input placeholder="Enter student name" id="name1" />
+        <input placeholder="Enter SID" id="sid1" />
+        <input placeholder="Enter Date of Birth" id="dob1" />
+        <input placeholder="Enter Height" id="height1" />
+
+        <div class="button-container">
+            <button onclick="addStudent()">Insert</button>
+            <button onclick="displayStudents()">Show Info</button>
+            <button onclick="clearStudents()">Clear All</button>
+        </div>
+
+        <input type="text" placeholder="Search by name or SID" id="searchQuery" onkeyup="searchStudent()">
+        <table id="studentTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>SID</th>
+                    <th>DOB</th>
+                    <th>Height</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        let studentArray = JSON.parse(localStorage.getItem("students")) || [];
+
+        class Student {
+            constructor(name, sid, dob, height) {
+                this.name = name;
+                this.sid = sid;
+                this.dob = dob;
+                this.height = height;
+            }
+        }
+
+        function addStudent() {
+            let name = document.getElementById("name1").value;
+            let sid = document.getElementById("sid1").value;
+            let dob = document.getElementById("dob1").value;
+            let height = document.getElementById("height1").value;
+
+            if (!name || !sid || !dob || !height) {
+                alert("Please fill all fields");
+                return;
+            }
+
+            if (studentArray.some(student => student.sid === sid)) {
+                alert("SID already exists!");
+                return;
+            }
+
+            let newStudent = new Student(name, sid, dob, height);
+            studentArray.push(newStudent);
+            localStorage.setItem("students", JSON.stringify(studentArray));
+
+            document.getElementById("name1").value = '';
+            document.getElementById("sid1").value = '';
+            document.getElementById("dob1").value = '';
+            document.getElementById("height1").value = '';
+
+            displayStudents();
+        }
+
+        function displayStudents() {
+            let tableBody = document.querySelector("#studentTable tbody");
+            tableBody.innerHTML = "";
+
+            studentArray.forEach(student => {
+                let row = `<tr>
+                    <td>${student.name}</td>
+                    <td>${student.sid}</td>
+                    <td>${student.dob}</td>
+                    <td>${student.height}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function clearStudents() {
+            studentArray = [];
+            localStorage.removeItem("students");
+            displayStudents();
+        }
+
+        function searchStudent() {
+            let query = document.getElementById("searchQuery").value.toLowerCase();
+            let tableBody = document.querySelector("#studentTable tbody");
+            tableBody.innerHTML = "";
+
+            let results = studentArray.filter(student =>
+                student.name.toLowerCase().includes(query) || student.sid.toLowerCase().includes(query)
+            );
+
+            results.forEach(student => {
+                let row = `<tr style="background-color: yellow;">
+                    <td>${student.name}</td>
+                    <td>${student.sid}</td>
+                    <td>${student.dob}</td>
+                    <td>${student.height}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        window.onload = displayStudents;
+    </script>
+</body>
+
+</html>

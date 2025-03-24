@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Enter marks and then click "Show" to see Kiran's grades:</h2>
+
+    <label for="maths">Mathematics:</label>
+    <input type="number" id="maths" placeholder="Enter Mathematics marks"><br><br>
+
+    <label for="english">English:</label>
+    <input type="number" id="english" placeholder="Enter English marks"><br><br>
+
+    <label for="urdu">Urdu:</label>
+    <input type="number" id="urdu" placeholder="Enter Urdu marks"><br><br>
+
+    <button onclick="insertMarks()">Insert</button>
+    <button onclick="showResult()">Show</button>
+
+    <p id="result"></p>
+
+    <script>
+        let results = [];
+
+        function insertMarks() {
+            let mathematics = parseInt(document.getElementById("maths").value);
+            let english = parseInt(document.getElementById("english").value);
+            let urdu = parseInt(document.getElementById("urdu").value);
+
+            if (!isNaN(mathematics) && !isNaN(english) && !isNaN(urdu)) {
+                results.push({
+                    mathematics: mathematics,
+                    english: english,
+                    urdu: urdu
+                });
+
+                document.getElementById("maths").value = "";
+                document.getElementById("english").value = "";
+                document.getElementById("urdu").value = "";
+            } else {
+                alert("Please enter valid marks for all subjects.");
+            }
+        }
+
+        function showResult() {
+            let resultText = "";
+
+            if (results.length === 0) {
+                resultText = "No results to display.";
+            } else {
+                results.forEach((result, index) => {
+                    resultText += `Student ${index + 1}: Mathematics: ${result.mathematics}, English: ${result.english}, Urdu: ${result.urdu}<br><br>`;
+                });
+            }
+
+            document.getElementById("result").innerHTML = resultText;
+        }
+    </script>
+
+</body>
+
+</html>

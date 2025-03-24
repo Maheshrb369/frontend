@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Pattern</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            margin-top: 50px;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            font-family: monospace;
+            text-align: left;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Generate Stars</h1>
+    <input type="number" id="input" placeholder="Enter a positive number">
+    <button onclick="printStars()">Generate</button>
+
+    <div id="output"></div>
+
+    <script>
+        function getRandomColor() {
+            return '#' + Math.floor(Math.random() * 16777215).toString(16);
+        }
+
+        function printStars() {
+            let n = document.getElementById("input").value;
+            let outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = "";
+
+            if (n <= 0 || isNaN(n)) {
+                outputDiv.innerHTML = "Please enter a positive number.";
+                return;
+            }
+
+            for (let i = 1; i <= n; i++) {
+                let row = document.createElement("div");
+                for (let j = 0; j < i; j++) {
+                    let star = document.createElement("span");
+                    star.textContent = "* ";
+                    star.style.color = getRandomColor();
+                    row.appendChild(star);
+                }
+                outputDiv.appendChild(row);
+            }
+        }
+    </script>
+</body>
+
+</html>

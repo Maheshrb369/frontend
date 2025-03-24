@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Portal</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #B0D0E8, #87A8C0);
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #5B8FB9, #91B8D4);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1.2px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 0 0 10px 10px;
+            position: relative;
+        }
+
+        /* Menu Button (Only visible on mobile) */
+        #menuButton {
+            display: none;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #FF6F91;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        /* Buttons Sidebar */
+        .buttons {
+            width: 250px;
+            background: linear-gradient(to bottom, #A4C2E0, #7C9EBF);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            border: none;
+            background: linear-gradient(to right, #FF6F91, #FF8FA3);
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #FF5F81, #FF7B95);
+            transform: translateY(-3px);
+            box-shadow: 0px 10px 20px rgba(255, 95, 129, 0.5);
+        }
+
+        .content {
+            flex-grow: 1;
+            display: flex;
+            background: linear-gradient(to right, #E4EDF7, #C2D7EC);
+            border-radius: 10px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+            padding: 10px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            border: none;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #7C9EBF, #A4C2E0);
+            color: #2C3E50;
+            padding: 15px;
+            text-align: center;
+            font-weight: 500;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .bu-bottom {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        .bu-button {
+            display: flex;
+            justify-items: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bu-img-bottom {
+            width: 50px;
+            height: 50px;
+
+        }
+
+        /* Mobile-Specific Footer Styles */
+        @media (max-width: 768px) {
+            footer {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .bu-button {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .bu-bottom {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .bu-img-bottom {
+                width: 40px;
+                height: 40px;
+            }
+
+            button {
+                width: auto;
+                padding: 10px 15px;
+                text-align: center;
+            }
+        }
+
+        /* Mobile-Specific Styles */
+        @media (max-width: 768px) {
+            #menuButton {
+                display: block;
+            }
+
+            .buttons {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 10px;
+                width: 220px;
+                background: linear-gradient(to bottom, #A4C2E0, #7C9EBF);
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+                flex-direction: column;
+            }
+
+            .buttons.show {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button id="menuButton"><i class="fas fa-bars"></i></button>
+        <h2>CLASS WORKS PORTAL</h2>
+    </header>
+
+    <div class="container">
+        <div class="buttons" id="dropdownMenu">
+            <button onclick="loadTask('basic.html')"><i class="fas fa-tasks"></i> Task 1</button>
+            <button onclick="loadTask('hover.html')"><i class="fas fa-mouse-pointer"></i> Task 2</button>
+            <button onclick="loadTask('alert.html')"><i class="fas fa-exclamation-circle"></i> Task 3</button>
+            <button onclick="loadTask('stars.html')"><i class="fas fa-star"></i> Task 4</button>
+            <button onclick="loadTask('calculator.html')"><i class="fas fa-calculator"></i> Task 5</button>
+            <button onclick="loadTask('normal-grade.html')"><i class="fas fa-graduation-cap"></i> Task 6</button>
+            <button onclick="loadTask('grade.html')"><i class="fas fa-book"></i> Task 7</button>
+            <button onclick="loadTask('student_info.html')"><i class="fas fa-user"></i> Task 8</button>
+            <button onclick="loadTask('form.html')"><i class="fas fa-file-alt"></i> Task 9</button>
+            <button onclick="loadTask('page-change-color.html')"><i class="fas fa-paint-brush"></i> Task 10</button>
+        </div>
+
+        <div class="content">
+            <iframe id="contentFrame"></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <div class="bu-button">
+
+            <div class="bu-bottom" style="margin-left: 30px;">
+                <a href="https://twitter.com" target="_blank" class="bu-bottom" style="text-decoration: none;">
+                    <button>Twitter</button>
+                    <img class=" bu-img-bottom" src="./resources/twitter.png" alt="Twitter img">
+                </a>
+
+            </div>
+            <div class="bu-bottom" style="margin-left: 30px;">
+                <a href="https://instagram.com" target="_blank" class="bu-bottom" style="text-decoration: none;">
+                    <button>Instagram</button>
+                    <img class=" bu-img-bottom" src="./resources/instagram.png" alt="Instagram img">
+                </a>
+
+            </div>
+            <div class="bu-bottom" style="margin-left: 30px;">
+                <a href="https://linkedin.com" target="_blank" class="bu-bottom" style="text-decoration: none;">
+                    <button>LinkedIn</button>
+                    <img class="bu-img-bottom" src="./resources/linkedin.png" alt="LinkedIn img">
+                </a>
+            </div>
+            <div style="margin-left: 30px;">
+                <p>© 2025 BMR. All rights reserved.</p>
+
+            </div>
+
+        </div>
+    </footer>
+    <script>
+        const menuButton = document.getElementById("menuButton");
+        const dropdownMenu = document.getElementById("dropdownMenu");
+
+        menuButton.addEventListener("click", () => {
+            dropdownMenu.classList.toggle("show");
+        });
+
+        function loadTask(taskPage) {
+            document.getElementById("contentFrame").src = taskPage;
+            dropdownMenu.classList.remove("show"); // Close dropdown after clicking a button
+        }
+
+        // Load Task 1 by default
+        window.onload = function () {
+            loadTask('basic.html');
+        };
+    </script>
+
+</body>
+
+</html>
