@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            width: 300px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 3px solid black;
+            /* Solid 3px border */
+            border-radius: 3px;
+            /* Rounded corners */
+            width: 80%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #ff4081;
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #e91e63;
+        }
+
+        .custom-alert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 1000;
+            width: 250px;
+            color: black;
+        }
+
+        .custom-alert button {
+            margin-top: 10px;
+            background: #2575fc;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2 style="color: black;">Enter your Username</h2>
+        <input type="text" id="username" placeholder="Enter Username">
+        <button onclick="welcomeUser()">Enter</button>
+    </div>
+
+    <div id="alertBox" class="custom-alert">
+        <p id="alertMessage"></p>
+        <button onclick="closeAlert()">OK</button>
+    </div>
+
+    <script>
+        function welcomeUser() {
+            var username = document.getElementById("username").value;
+            var messageBox = document.getElementById("alertBox");
+            var messageText = document.getElementById("alertMessage");
+
+            if (username.trim() !== "") {
+                messageText.textContent = "Welcome to JS " + username;
+            } else {
+                messageText.textContent = "This page says:\nPlease enter a username";
+            }
+
+            messageBox.style.display = "block";
+        }
+
+        function closeAlert() {
+            document.getElementById("alertBox").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
